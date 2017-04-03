@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Web Services API : TEC_AdministracionProductos_ws
+-->
+<definitions targetNamespace="http://soap.sforce.com/schemas/class/TEC_AdministracionProductos_ws" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.sforce.com/schemas/class/TEC_AdministracionProductos_ws" xmlns:TEC_Actualizar_ProductoRequest_cls="http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls" xmlns:TEC_Actualizar_ProductoResponse_cls="http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoResponse_cls">
+ <types>
+  <xsd:schema elementFormDefault="qualified" targetNamespace="http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls">
+   <xsd:complexType name="TEC_Actualizar_ProductoRequest_cls">
+    <xsd:sequence>
+     <xsd:element name="Abreviatura" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="Capacidad" minOccurs="0" type="xsd:int" nillable="true"/>
+     <xsd:element name="DescripcionCurso" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="DescripcionPeriodo" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="Estado" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="Familia" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="FechaFin" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="FechaInicio" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="Horas" minOccurs="0" type="xsd:int" nillable="true"/>
+     <xsd:element name="IdTecsupArea" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="IdTecsupCurso" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="IdTecsupPeriodo" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="NombreCurso" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="NombrePeriodo" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="Seccion" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="Tipo" minOccurs="0" type="xsd:string" nillable="true"/>
+    </xsd:sequence>
+   </xsd:complexType>
+  </xsd:schema>
+  <xsd:schema elementFormDefault="qualified" targetNamespace="http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoResponse_cls">
+   <xsd:complexType name="TEC_Actualizar_ProductoResponse_cls">
+    <xsd:sequence>
+     <xsd:element name="Error" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="IdCurso" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="IdOfertaCurso" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="IdPeriodo" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="Resultado" minOccurs="0" type="xsd:boolean" nillable="true"/>
+    </xsd:sequence>
+   </xsd:complexType>
+  </xsd:schema>
+  <xsd:schema elementFormDefault="qualified" targetNamespace="http://soap.sforce.com/schemas/class/TEC_AdministracionProductos_ws">
+   <xsd:import namespace="http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoResponse_cls"/>
+   <xsd:import namespace="http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls"/>
+   <xsd:element name="SessionHeader">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="sessionId" type="xsd:string"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="PersistirProducto">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="ProductoRequest" type="TEC_Actualizar_ProductoRequest_cls:TEC_Actualizar_ProductoRequest_cls" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="PersistirProductoResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" type="TEC_Actualizar_ProductoResponse_cls:TEC_Actualizar_ProductoResponse_cls" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+  </xsd:schema>
+ </types>
+ <!-- Message for the header parts -->
+ <message name="Header">
+  <part name="SessionHeader" element="tns:SessionHeader"/>
+ </message>
+ <!-- Operation Messages -->
+ <message name="PersistirProductoRequest">
+  <part element="tns:PersistirProducto" name="parameters"/>
+ </message>
+ <message name="PersistirProductoResponse">
+  <part element="tns:PersistirProductoResponse" name="parameters"/>
+ </message>
+ <portType name="TEC_AdministracionProductos_wsPortType">
+  <operation name="PersistirProducto">
+   <input message="tns:PersistirProductoRequest"/>
+   <output message="tns:PersistirProductoResponse"/>
+  </operation>
+ </portType>
+ <binding name="TEC_AdministracionProductos_wsBinding" type="tns:TEC_AdministracionProductos_wsPortType">
+  <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="PersistirProducto">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+ </binding>
+ <service name="TEC_AdministracionProductos_wsService">
+  <documentation></documentation>
+  <port binding="tns:TEC_AdministracionProductos_wsBinding" name="TEC_AdministracionProductos_ws">
+   <soap:address location="https://cs71.salesforce.com/services/Soap/class/TEC_AdministracionProductos_ws"/>
+  </port>
+ </service>
+</definitions>

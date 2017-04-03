@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Web Services API : TEC_ProductosAdquiridosPorCliente_ws
+-->
+<definitions targetNamespace="http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws">
+ <types>
+  <xsd:schema elementFormDefault="qualified" targetNamespace="http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws">
+   <xsd:element name="SessionHeader">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="sessionId" type="xsd:string"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:complexType name="objRequest">
+    <xsd:sequence>
+     <xsd:element name="strAuspiciador" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="strConvenio" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="strEstado" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="strIdCursoTecsup" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="strIdTerminoTecsup" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="strNumeroDocContacto" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="strTipoDocContacto" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="strTipoOperacion" minOccurs="0" type="xsd:string" nillable="true"/>
+    </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="objResponse">
+    <xsd:sequence>
+     <xsd:element name="blnResultado" minOccurs="0" type="xsd:boolean" nillable="true"/>
+     <xsd:element name="strIdCourseEnrollment" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="strMensajeError" minOccurs="0" type="xsd:string" nillable="true"/>
+    </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="productosAdquiridosPorCliente">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="infoCourse" type="tns:objRequest" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="productosAdquiridosPorClienteResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="result" type="tns:objResponse" nillable="true"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+  </xsd:schema>
+ </types>
+ <!-- Message for the header parts -->
+ <message name="Header">
+  <part name="SessionHeader" element="tns:SessionHeader"/>
+ </message>
+ <!-- Operation Messages -->
+ <message name="productosAdquiridosPorClienteRequest">
+  <part element="tns:productosAdquiridosPorCliente" name="parameters"/>
+ </message>
+ <message name="productosAdquiridosPorClienteResponse">
+  <part element="tns:productosAdquiridosPorClienteResponse" name="parameters"/>
+ </message>
+ <portType name="TEC_ProductosAdquiridosPorCliente_wsPortType">
+  <operation name="productosAdquiridosPorCliente">
+   <input message="tns:productosAdquiridosPorClienteRequest"/>
+   <output message="tns:productosAdquiridosPorClienteResponse"/>
+  </operation>
+ </portType>
+ <binding name="TEC_ProductosAdquiridosPorCliente_wsBinding" type="tns:TEC_ProductosAdquiridosPorCliente_wsPortType">
+  <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="productosAdquiridosPorCliente">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:header use="literal" part="SessionHeader" message="tns:Header"/>
+    <soap:body use="literal" parts="parameters"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+  </operation>
+ </binding>
+ <service name="TEC_ProductosAdquiridosPorCliente_wsService">
+  <documentation></documentation>
+  <port binding="tns:TEC_ProductosAdquiridosPorCliente_wsBinding" name="TEC_ProductosAdquiridosPorCliente_ws">
+   <soap:address location="https://cs71.salesforce.com/services/Soap/class/TEC_ProductosAdquiridosPorCliente_ws"/>
+  </port>
+ </service>
+</definitions>

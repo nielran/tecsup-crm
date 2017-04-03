@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Salesforce.com Partner Web Services API Version 39.0
+Generated on 2017-03-28 16:04:19 +0000.
+
+Copyright 1999-2017 salesforce.com, inc.
+All Rights Reserved
+-->
+
+<definitions targetNamespace="urn:partner.soap.sforce.com"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:fns="urn:fault.partner.soap.sforce.com"
+             xmlns:tns="urn:partner.soap.sforce.com"
+             xmlns:ens="urn:sobject.partner.soap.sforce.com">
+    <types>
+
+        <schema elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:sobject.partner.soap.sforce.com">
+
+            <import namespace="urn:partner.soap.sforce.com"/>
+
+		</schema>
+
+        <schema elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:partner.soap.sforce.com">
+
+            <import namespace="urn:sobject.partner.soap.sforce.com"/>
+			
+            <!-- These are the extension code to provide additional error information -->
+            <simpleType name="ExtendedErrorCode">
+                <restriction base="xsd:string">
+                </restriction>
+            </simpleType>
+            <complexType name="ExtendedErrorDetails">
+                <sequence>
+                    <element name="extendedErrorCode" type="tns:ExtendedErrorCode"/>
+                    <any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                </sequence>
+            </complexType>
+			
+			<!-- Our simple ID Type -->
+            <simpleType name="ID">
+                <restriction base="xsd:string">
+                    <length value="18"/>
+                    <pattern value='[a-zA-Z0-9]{18}'/>
+                </restriction>
+            </simpleType>
+			
+			<complexType name="GetUserInfoResult">
+                <sequence>
+                    <element name="accessibilityMode"          type="xsd:boolean"/>
+                    <element name="currencySymbol"             type="xsd:string" nillable="true"/>
+
+                    <element name="orgAttachmentFileSizeLimit" type="xsd:int"/>
+                    <element name="orgDefaultCurrencyIsoCode"  type="xsd:string" nillable="true"/>
+                    <element name="orgDefaultCurrencyLocale"   type="xsd:string" nillable="true"/>
+                    <element name="orgDisallowHtmlAttachments" type="xsd:boolean"/>
+                    <element name="orgHasPersonAccounts"       type="xsd:boolean"/>
+                    <element name="organizationId"             type="tns:ID"/>
+                    <element name="organizationMultiCurrency"  type="xsd:boolean"/>
+                    <element name="organizationName"           type="xsd:string"/>
+                    <element name="profileId"                  type="tns:ID"/>
+                    <element name="roleId"                     type="tns:ID" nillable="true"/>
+                    <element name="sessionSecondsValid"        type="xsd:int"/>
+                    <element name="userDefaultCurrencyIsoCode" type="xsd:string" nillable="true"/>
+                    <element name="userEmail"                  type="xsd:string"/>
+                    <element name="userFullName"               type="xsd:string"/>
+                    <element name="userId"                     type="tns:ID"/>
+                    <element name="userLanguage"               type="xsd:string"/>
+                    <element name="userLocale"                 type="xsd:string"/>
+                    <element name="userName"                   type="xsd:string"/>
+                    <element name="userTimeZone"               type="xsd:string"/>
+                    <element name="userType"                   type="xsd:string"/>
+                    <element name="userUiSkin"                 type="xsd:string"/>
+                </sequence>
+            </complexType>
+			
+			<complexType name="LoginResult">
+                <sequence>
+                    <element name="metadataServerUrl" type="xsd:string" nillable="true"/>
+                    <element name="passwordExpired"   type="xsd:boolean" />
+                    <element name="sandbox"      	type="xsd:boolean"/>
+                    <element name="serverUrl"         type="xsd:string" nillable="true"/>
+                    <element name="sessionId"         type="xsd:string" nillable="true"/>
+
+                    <element name="userId"           type="tns:ID" nillable="true"/>
+                    <element name="userInfo"         type="tns:GetUserInfoResult" minOccurs="0"/>
+                </sequence>
+            </complexType>
+			
+            <!-- Login Message Types -->
+            <element name="login">
+                <complexType>
+                    <sequence>
+                        <element name="username" type="xsd:string"/>
+                        <element name="password" type="xsd:string"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="loginResponse">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="tns:LoginResult"/>
+                    </sequence>
+                </complexType>
+            </element>
+			
+		</schema>
+		
+        <schema elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:fault.partner.soap.sforce.com" xmlns:fns="urn:fault.partner.soap.sforce.com">
+
+            <import namespace="urn:partner.soap.sforce.com"/>
+			
+            <simpleType name="ExceptionCode">
+                <restriction base="xsd:string">
+                    <enumeration value="APEX_TRIGGER_COUPLING_LIMIT"/>
+                    <enumeration value="API_CURRENTLY_DISABLED"/>
+                    <enumeration value="API_DISABLED_FOR_ORG"/>
+                    <enumeration value="ARGUMENT_OBJECT_PARSE_ERROR"/>
+                    <enumeration value="ASYNC_OPERATION_LOCATOR"/>
+                    <enumeration value="ASYNC_QUERY_UNSUPPORTED_QUERY"/>
+                    <enumeration value="BATCH_PROCESSING_HALTED"/>
+                    <enumeration value="BIG_OBJECT_UNSUPPORTED_OPERATION"/>
+                    <enumeration value="CANNOT_DELETE_ENTITY"/>
+                    <enumeration value="CANNOT_DELETE_OWNER"/>
+                    <enumeration value="CANT_ADD_STANDADRD_PORTAL_USER_TO_TERRITORY"/>
+                    <enumeration value="CANT_ADD_STANDARD_PORTAL_USER_TO_TERRITORY"/>
+                    <enumeration value="CIRCULAR_OBJECT_GRAPH"/>
+                    <enumeration value="CLIENT_NOT_ACCESSIBLE_FOR_USER"/>
+                    <enumeration value="CLIENT_REQUIRE_UPDATE_FOR_USER"/>
+                    <enumeration value="CONTENT_CUSTOM_DOWNLOAD_EXCEPTION"/>
+                    <enumeration value="CONTENT_HUB_AUTHENTICATION_EXCEPTION"/>
+                    <enumeration value="CONTENT_HUB_FILE_DOWNLOAD_EXCEPTION"/>
+                    <enumeration value="CONTENT_HUB_FILE_NOT_FOUND_EXCEPTION"/>
+                    <enumeration value="CONTENT_HUB_INVALID_OBJECT_TYPE_EXCEPTION"/>
+                    <enumeration value="CONTENT_HUB_INVALID_PAGE_NUMBER_EXCEPTION"/>
+                    <enumeration value="CONTENT_HUB_INVALID_PAYLOAD"/>
+                    <enumeration value="CONTENT_HUB_INVALID_RENDITION_PAGE_NUMBER_EXCEPTION"/>
+                    <enumeration value="CONTENT_HUB_ITEM_TYPE_NOT_FOUND_EXCEPTION"/>
+                    <enumeration value="CONTENT_HUB_OBJECT_NOT_FOUND_EXCEPTION"/>
+                    <enumeration value="CONTENT_HUB_OPERATION_NOT_SUPPORTED_EXCEPTION"/>
+                    <enumeration value="CONTENT_HUB_SECURITY_EXCEPTION"/>
+                    <enumeration value="CONTENT_HUB_TIMEOUT_EXCEPTION"/>
+                    <enumeration value="CONTENT_HUB_UNEXPECTED_EXCEPTION"/>
+                    <enumeration value="CUSTOM_METADATA_LIMIT_EXCEEDED"/>
+                    <enumeration value="CUSTOM_SETTINGS_LIMIT_EXCEEDED"/>
+                    <enumeration value="DATACLOUD_API_CLIENT_EXCEPTION"/>
+                    <enumeration value="DATACLOUD_API_DISABLED_EXCEPTION"/>
+                    <enumeration value="DATACLOUD_API_INVALID_QUERY_EXCEPTION"/>
+                    <enumeration value="DATACLOUD_API_SERVER_BUSY_EXCEPTION"/>
+                    <enumeration value="DATACLOUD_API_SERVER_EXCEPTION"/>
+                    <enumeration value="DATACLOUD_API_TIMEOUT_EXCEPTION"/>
+                    <enumeration value="DATACLOUD_API_UNAVAILABLE"/>
+                    <enumeration value="DUPLICATE_ARGUMENT_VALUE"/>
+                    <enumeration value="DUPLICATE_VALUE"/>
+                    <enumeration value="EMAIL_BATCH_SIZE_LIMIT_EXCEEDED"/>
+                    <enumeration value="EMAIL_TO_CASE_INVALID_ROUTING"/>
+                    <enumeration value="EMAIL_TO_CASE_LIMIT_EXCEEDED"/>
+                    <enumeration value="EMAIL_TO_CASE_NOT_ENABLED"/>
+                    <enumeration value="ENTITY_NOT_QUERYABLE"/>
+                    <enumeration value="ENVIRONMENT_HUB_MEMBERSHIP_CONFLICT"/>
+                    <enumeration value="EXCEEDED_ID_LIMIT"/>
+                    <enumeration value="EXCEEDED_LEAD_CONVERT_LIMIT"/>
+                    <enumeration value="EXCEEDED_MAX_SIZE_REQUEST"/>
+                    <enumeration value="EXCEEDED_MAX_SOBJECTS"/>
+                    <enumeration value="EXCEEDED_MAX_TYPES_LIMIT"/>
+                    <enumeration value="EXCEEDED_QUOTA"/>
+                    <enumeration value="EXTERNAL_OBJECT_AUTHENTICATION_EXCEPTION"/>
+                    <enumeration value="EXTERNAL_OBJECT_CONNECTION_EXCEPTION"/>
+                    <enumeration value="EXTERNAL_OBJECT_EXCEPTION"/>
+                    <enumeration value="EXTERNAL_OBJECT_UNSUPPORTED_EXCEPTION"/>
+                    <enumeration value="FEDERATED_SEARCH_ERROR"/>
+                    <enumeration value="FEED_NOT_ENABLED_FOR_OBJECT"/>
+                    <enumeration value="FUNCTIONALITY_NOT_ENABLED"/>
+                    <enumeration value="FUNCTIONALITY_TEMPORARILY_UNAVAILABLE"/>
+                    <enumeration value="ILLEGAL_QUERY_PARAMETER_VALUE"/>
+                    <enumeration value="INACTIVE_OWNER_OR_USER"/>
+                    <enumeration value="INACTIVE_PORTAL"/>
+                    <enumeration value="INSERT_UPDATE_DELETE_NOT_ALLOWED_DURING_MAINTENANCE"/>
+                    <enumeration value="INSUFFICIENT_ACCESS"/>
+                    <enumeration value="INTERNAL_CANVAS_ERROR"/>
+                    <enumeration value="INVALID_ASSIGNMENT_RULE"/>
+                    <enumeration value="INVALID_BATCH_REQUEST"/>
+                    <enumeration value="INVALID_BATCH_SIZE"/>
+                    <enumeration value="INVALID_CLIENT"/>
+                    <enumeration value="INVALID_CROSS_REFERENCE_KEY"/>
+                    <enumeration value="INVALID_DATE_FORMAT"/>
+                    <enumeration value="INVALID_FIELD"/>
+                    <enumeration value="INVALID_FILTER_LANGUAGE"/>
+                    <enumeration value="INVALID_FILTER_VALUE"/>
+                    <enumeration value="INVALID_ID_FIELD"/>
+                    <enumeration value="INVALID_INPUT_COMBINATION"/>
+                    <enumeration value="INVALID_LOCALE_LANGUAGE"/>
+                    <enumeration value="INVALID_LOCATOR"/>
+                    <enumeration value="INVALID_LOGIN"/>
+                    <enumeration value="INVALID_MULTIPART_REQUEST"/>
+                    <enumeration value="INVALID_NEW_PASSWORD"/>
+                    <enumeration value="INVALID_OPERATION"/>
+                    <enumeration value="INVALID_OPERATION_WITH_EXPIRED_PASSWORD"/>
+                    <enumeration value="INVALID_PACKAGE_VERSION"/>
+                    <enumeration value="INVALID_PAGING_OPTION"/>
+                    <enumeration value="INVALID_QUERY_FILTER_OPERATOR"/>
+                    <enumeration value="INVALID_QUERY_LOCATOR"/>
+                    <enumeration value="INVALID_QUERY_SCOPE"/>
+                    <enumeration value="INVALID_REPLICATION_DATE"/>
+                    <enumeration value="INVALID_SEARCH"/>
+                    <enumeration value="INVALID_SEARCH_SCOPE"/>
+                    <enumeration value="INVALID_SESSION_ID"/>
+                    <enumeration value="INVALID_SOAP_HEADER"/>
+                    <enumeration value="INVALID_SORT_OPTION"/>
+                    <enumeration value="INVALID_SSO_GATEWAY_URL"/>
+                    <enumeration value="INVALID_TYPE"/>
+                    <enumeration value="INVALID_TYPE_FOR_OPERATION"/>
+                    <enumeration value="JIGSAW_ACTION_DISABLED"/>
+                    <enumeration value="JIGSAW_IMPORT_LIMIT_EXCEEDED"/>
+                    <enumeration value="JIGSAW_REQUEST_NOT_SUPPORTED"/>
+                    <enumeration value="JSON_PARSER_ERROR"/>
+                    <enumeration value="KEY_HAS_BEEN_DESTROYED"/>
+                    <enumeration value="LICENSING_DATA_ERROR"/>
+                    <enumeration value="LICENSING_UNKNOWN_ERROR"/>
+                    <enumeration value="LIMIT_EXCEEDED"/>
+                    <enumeration value="LOGIN_CHALLENGE_ISSUED"/>
+                    <enumeration value="LOGIN_CHALLENGE_PENDING"/>
+                    <enumeration value="LOGIN_DURING_RESTRICTED_DOMAIN"/>
+                    <enumeration value="LOGIN_DURING_RESTRICTED_TIME"/>
+                    <enumeration value="LOGIN_MUST_USE_SECURITY_TOKEN"/>
+                    <enumeration value="MALFORMED_ID"/>
+                    <enumeration value="MALFORMED_QUERY"/>
+                    <enumeration value="MALFORMED_SEARCH"/>
+                    <enumeration value="MISSING_ARGUMENT"/>
+                    <enumeration value="MISSING_RECORD"/>
+                    <enumeration value="MODIFIED"/>
+                    <enumeration value="MUTUAL_AUTHENTICATION_FAILED"/>
+                    <enumeration value="NOT_ACCEPTABLE"/>
+                    <enumeration value="NOT_MODIFIED"/>
+                    <enumeration value="NO_ACTIVE_DUPLICATE_RULE"/>
+                    <enumeration value="NO_RECIPIENTS"/>
+                    <enumeration value="NO_SOFTPHONE_LAYOUT"/>
+                    <enumeration value="NUMBER_OUTSIDE_VALID_RANGE"/>
+                    <enumeration value="OPERATION_TOO_LARGE"/>
+                    <enumeration value="ORG_IN_MAINTENANCE"/>
+                    <enumeration value="ORG_IS_DOT_ORG"/>
+                    <enumeration value="ORG_IS_SIGNING_UP"/>
+                    <enumeration value="ORG_LOCKED"/>
+                    <enumeration value="ORG_NOT_OWNED_BY_INSTANCE"/>
+                    <enumeration value="PASSWORD_LOCKOUT"/>
+                    <enumeration value="PORTAL_NO_ACCESS"/>
+                    <enumeration value="POST_BODY_PARSE_ERROR"/>
+                    <enumeration value="QUERY_TIMEOUT"/>
+                    <enumeration value="QUERY_TOO_COMPLICATED"/>
+                    <enumeration value="REALTIME_PROCESSING_TIME_EXCEEDED_LIMIT"/>
+                    <enumeration value="REQUEST_LIMIT_EXCEEDED"/>
+                    <enumeration value="REQUEST_RUNNING_TOO_LONG"/>
+                    <enumeration value="SERVER_UNAVAILABLE"/>
+                    <enumeration value="SERVICE_DESK_NOT_ENABLED"/>
+                    <enumeration value="SOCIALCRM_FEEDSERVICE_API_CLIENT_EXCEPTION"/>
+                    <enumeration value="SOCIALCRM_FEEDSERVICE_API_SERVER_EXCEPTION"/>
+                    <enumeration value="SOCIALCRM_FEEDSERVICE_API_UNAVAILABLE"/>
+                    <enumeration value="SSO_SERVICE_DOWN"/>
+                    <enumeration value="SST_ADMIN_FILE_DOWNLOAD_EXCEPTION"/>
+                    <enumeration value="TOO_MANY_APEX_REQUESTS"/>
+                    <enumeration value="TOO_MANY_RECIPIENTS"/>
+                    <enumeration value="TOO_MANY_RECORDS"/>
+                    <enumeration value="TRIAL_EXPIRED"/>
+                    <enumeration value="TXN_SECURITY_END_A_SESSION"/>
+                    <enumeration value="TXN_SECURITY_NO_ACCESS"/>
+                    <enumeration value="TXN_SECURITY_TWO_FA_REQUIRED"/>
+                    <enumeration value="UNABLE_TO_LOCK_ROW"/>
+                    <enumeration value="UNKNOWN_ATTACHMENT_EXCEPTION"/>
+                    <enumeration value="UNKNOWN_EXCEPTION"/>
+                    <enumeration value="UNKNOWN_ORG_SETTING"/>
+                    <enumeration value="UNSUPPORTED_API_VERSION"/>
+                    <enumeration value="UNSUPPORTED_ATTACHMENT_ENCODING"/>
+                    <enumeration value="UNSUPPORTED_CLIENT"/>
+                    <enumeration value="UNSUPPORTED_MEDIA_TYPE"/>
+                    <enumeration value="XML_PARSER_ERROR"/>
+                </restriction>
+            </simpleType>
+
+			<!-- Fault -->
+            <complexType name="ApiFault">
+                <sequence>
+                    <element name="exceptionCode"    type="fns:ExceptionCode"/>
+                    <element name="exceptionMessage" type="xsd:string"/>
+                    <element name="extendedErrorDetails" type="tns:ExtendedErrorDetails" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+                </sequence>
+            </complexType>
+			<element name="fault" type="fns:ApiFault" />
+			
+			<complexType name="LoginFault">
+                <complexContent>
+                    <extension base="fns:ApiFault"/>
+                </complexContent>
+            </complexType>
+            <element name="LoginFault" type="fns:LoginFault"/>
+			
+            <complexType name="InvalidIdFault">
+                <complexContent>
+                    <extension base="fns:ApiFault"/>
+                </complexContent>
+            </complexType>
+            <element name="InvalidIdFault" type="fns:InvalidIdFault"/>
+
+            <complexType name="UnexpectedErrorFault">
+                <complexContent>
+                    <extension base="fns:ApiFault"/>
+                </complexContent>
+            </complexType>
+            <element name="UnexpectedErrorFault" type="fns:UnexpectedErrorFault"/>
+
+        </schema>
+    </types>
+	
+    <!-- Fault Messages -->
+
+    <message name="ApiFault">
+        <part name="fault" element="fns:fault"/>
+    </message>
+
+    <message name="LoginFault">
+        <part name="fault" element="fns:LoginFault"/>
+    </message>
+    <message name="InvalidIdFault">
+        <part name="fault" element="fns:InvalidIdFault"/>
+    </message>
+    <message name="UnexpectedErrorFault">
+        <part name="fault" element="fns:UnexpectedErrorFault"/>
+    </message>
+    
+    <!-- Method Messages -->
+    <message name="loginRequest">
+        <part element="tns:login" name="parameters"/>
+    </message>
+    <message name="loginResponse">
+        <part element="tns:loginResponse" name="parameters"/>
+    </message>
+
+    <!-- Soap PortType -->
+    <portType name="Soap">
+        <operation name="login">
+            <documentation>Login to the Salesforce.com SOAP Api</documentation>
+            <input  message="tns:loginRequest"/>
+            <output message="tns:loginResponse"/>
+            <fault  message="tns:LoginFault" name="LoginFault"/>
+            <fault  message="tns:UnexpectedErrorFault" name="UnexpectedErrorFault"/>
+            <fault  message="tns:InvalidIdFault" name="InvalidIdFault"/>
+        </operation>
+    </portType>
+
+    <!-- Soap Binding -->
+    <binding name="SoapBinding" type="tns:Soap">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="login">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body parts="parameters" use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="LoginFault">
+                <soap:fault name="LoginFault" use="literal"/>
+            </fault>
+            <fault name="UnexpectedErrorFault">
+                <soap:fault name="UnexpectedErrorFault" use="literal"/>
+            </fault>
+            <fault name="InvalidIdFault">
+                <soap:fault name="InvalidIdFault" use="literal"/>
+            </fault>
+        </operation>
+        
+    </binding>
+
+    <!-- Soap Service Endpoint -->
+    <service name="SforceService">
+        <documentation>Sforce SOAP API</documentation>
+        <port binding="tns:SoapBinding" name="Soap">
+            <soap:address location="https://test.salesforce.com/services/Soap/u/39.0"/>
+        </port>
+    </service>
+</definitions>
