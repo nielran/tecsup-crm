@@ -54,8 +54,8 @@ public class CrmRepository {
                 producto.setDescripcionPeriodo(factory.createTECActualizarProductoRequestClsDescripcionPeriodo((String)record.get("DESCRIPCIONPERIODO")));
                 producto.setEstado(factory.createTECActualizarProductoRequestClsEstado((String)record.get("ESTADO")));
                 producto.setFamilia(factory.createTECActualizarProductoRequestClsFamilia((String)record.get("FAMILIA")));
-                producto.setFechaFin(factory.createTECActualizarProductoRequestClsFechaFin(new SimpleDateFormat("dd/MM/yyyy").format(new Date(((Timestamp)record.get("FECHAFIN")).getTime()))));
-                producto.setFechaInicio(factory.createTECActualizarProductoRequestClsFechaInicio(new SimpleDateFormat("dd/MM/yyyy").format(new Date(((Timestamp)record.get("FECHAINICIO")).getTime()))));
+                producto.setFechaFin(factory.createTECActualizarProductoRequestClsFechaFin((String)record.get("FECHAFIN")));
+                producto.setFechaInicio(factory.createTECActualizarProductoRequestClsFechaInicio((String)record.get("FECHAINICIO")));
                 producto.setHoras(factory.createTECActualizarProductoRequestClsHoras(((BigDecimal)record.get("HORAS")).intValue()));
                 producto.setIdTecsupArea(factory.createTECActualizarProductoRequestClsIdTecsupArea(((BigDecimal)record.get("IDTECSUPAREA")).toString()));
                 producto.setIdTecsupCurso(factory.createTECActualizarProductoRequestClsIdTecsupCurso(((BigDecimal)record.get("IDTECSUPCURSO")).toString()));
