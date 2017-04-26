@@ -22,7 +22,7 @@ public class InscripcionClient extends WebServiceGatewaySupport {
         jaxb2Marshaller.setContextPath("com.sforce.soap3");
         getWebServiceTemplate().setMarshaller(jaxb2Marshaller);
         getWebServiceTemplate().setUnmarshaller(jaxb2Marshaller);
-        getWebServiceTemplate().setDefaultUri("https://cs71.salesforce.com/services/Soap/class/TEC_ProductosAdquiridosPorCliente_ws");
+        getWebServiceTemplate().setDefaultUri("https://na40.salesforce.com/services/Soap/class/TEC_ProductosAdquiridosPorCliente_ws");
     }
 
     public ObjResponse sendInscripcion(String sessionid, ObjRequest inscripcion){

@@ -22,7 +22,7 @@ public class ProductoClient  extends WebServiceGatewaySupport {
         jaxb2Marshaller.setContextPath("com.sforce.soap2");
         getWebServiceTemplate().setMarshaller(jaxb2Marshaller);
         getWebServiceTemplate().setUnmarshaller(jaxb2Marshaller);
-        getWebServiceTemplate().setDefaultUri("https://cs71.salesforce.com/services/Soap/class/TEC_AdministracionProductos_ws");
+        getWebServiceTemplate().setDefaultUri("https://na40.salesforce.com/services/Soap/class/TEC_AdministracionProductos_ws");
     }
 
     public TECActualizarProductoResponseCls sendProducto(String sessionid, TECActualizarProductoRequestCls producto){

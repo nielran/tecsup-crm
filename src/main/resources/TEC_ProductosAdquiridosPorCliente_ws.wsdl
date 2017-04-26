@@ -80,7 +80,7 @@
  <service name="TEC_ProductosAdquiridosPorCliente_wsService">
   <documentation></documentation>
   <port binding="tns:TEC_ProductosAdquiridosPorCliente_wsBinding" name="TEC_ProductosAdquiridosPorCliente_ws">
-   <soap:address location="https://cs71.salesforce.com/services/Soap/class/TEC_ProductosAdquiridosPorCliente_ws"/>
+   <soap:address location="https://na40.salesforce.com/services/Soap/class/TEC_ProductosAdquiridosPorCliente_ws"/>
   </port>
  </service>
 </definitions>
