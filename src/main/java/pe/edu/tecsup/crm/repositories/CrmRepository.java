@@ -49,7 +49,7 @@ public class CrmRepository {
 
                 TECActualizarProductoRequestCls producto = factory.createTECActualizarProductoRequestCls();
                 producto.setAbreviatura(factory.createTECActualizarProductoRequestClsAbreviatura((String)record.get("ABREVIATURA")));
-                producto.setCapacidad(factory.createTECActualizarProductoRequestClsCapacidad(((BigDecimal)record.get("CAPACIDAD")).intValue()));
+                producto.setCapacidad(factory.createTECActualizarProductoRequestClsCapacidad((record.get("CAPACIDAD")!=null)?((BigDecimal)record.get("CAPACIDAD")).intValue():0));
                 producto.setDescripcionCurso(factory.createTECActualizarProductoRequestClsDescripcionCurso((String)record.get("DESCRIPCIONCURSO")));
                 producto.setDescripcionPeriodo(factory.createTECActualizarProductoRequestClsDescripcionPeriodo((String)record.get("DESCRIPCIONPERIODO")));
                 producto.setEstado(factory.createTECActualizarProductoRequestClsEstado((String)record.get("ESTADO")));
@@ -100,7 +100,7 @@ public class CrmRepository {
                 ObjRequest inscripcion = factory.createObjRequest();
                 inscripcion.setStrTipoOperacion(factory.createObjRequestStrTipoOperacion(((BigDecimal)record.get("TIPOPERACION")).toString()));
                 inscripcion.setStrIdCursoTecsup(factory.createObjRequestStrIdCursoTecsup(((BigDecimal)record.get("IDCURSO")).toString()));
-                inscripcion.setStrIdTerminoTecsup(factory.createObjRequestStrIdTerminoTecsup(((BigDecimal)record.get("IDTERMINO")).toString()));
+                inscripcion.setStrIdTerminoTecsup(factory.createObjRequestStrIdTerminoTecsup((String)record.get("IDTERMINO")));
                 inscripcion.setStrTipoDocContacto(factory.createObjRequestStrTipoDocContacto((String)record.get("TIPDOCUMENTO")));
                 inscripcion.setStrNumeroDocContacto(factory.createObjRequestStrNumeroDocContacto((String)record.get("NUMDOCUMENTO")));
                 inscripcion.setStrEstado(factory.createObjRequestStrEstado((String)record.get("ESTADO")));

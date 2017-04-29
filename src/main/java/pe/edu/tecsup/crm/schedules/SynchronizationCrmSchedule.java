@@ -117,11 +117,11 @@ public class SynchronizationCrmSchedule {
                         throw new WebServiceException(result.getStrMensajeError().getValue());
 
                     log.info("sendInscripcion success!");
-                    messages.add("OK: [" + inscripcion.getStrIdCursoTecsup().getValue() + ":" + inscripcion.getStrIdTerminoTecsup() + ":" + inscripcion.getStrNumeroDocContacto().getValue() + "] Inscripcion Actualizado!");
+                    messages.add("OK: [" + inscripcion.getStrIdCursoTecsup().getValue() + ":" + inscripcion.getStrIdTerminoTecsup().getValue() + ":" + inscripcion.getStrNumeroDocContacto().getValue() + "] Inscripcion Actualizado!");
 
                 } catch (Exception e) {
                     log.error(e, e);
-                    messages.add("ERROR I: [" + inscripcion.getStrIdCursoTecsup().getValue() + ":" + inscripcion.getStrIdTerminoTecsup() + ":" + inscripcion.getStrNumeroDocContacto().getValue() + "] " + e.getMessage());
+                    messages.add("ERROR I: [" + inscripcion.getStrIdCursoTecsup().getValue() + ":" + inscripcion.getStrIdTerminoTecsup().getValue() + ":" + inscripcion.getStrNumeroDocContacto().getValue() + "] " + e.getMessage());
                 }
             }
 
