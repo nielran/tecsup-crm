@@ -22,6 +22,11 @@ public class CrmService {
 		return crmRepository.productos();
 	}
 
+	public void checkProducto(String sql) throws Exception {
+		log.info("calling checkProducto");
+		crmRepository.checkProducto(sql);
+	}
+
 	public List<ObjRequest> inscripciones() throws Exception {
 		log.info("calling inscripciones");
 		return crmRepository.inscripciones();

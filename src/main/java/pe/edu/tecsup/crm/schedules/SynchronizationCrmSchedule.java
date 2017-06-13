@@ -82,12 +82,14 @@ public class SynchronizationCrmSchedule {
                     if (!result.getResultado().getValue())
                         throw new WebServiceException(result.getError().getValue());
 
+                    crmService.checkProducto(producto.getUpdate());
+
                     log.info("sendProducto success!");
-                    messages.add("OK: [" + producto.getIdTecsupCurso().getValue() + "] Producto Actualizado!");
+                    messages.add("OK: [Periodo:" + producto.getIdTecsupPeriodo().getValue() + " - Curso:" + producto.getIdTecsupCurso().getValue() + "] Producto Actualizado!");
 
                 } catch (Exception e) {
                     log.error(e, e);
-                    messages.add("ERROR P: [" + producto.getIdTecsupCurso().getValue() + "] " + e.getMessage());
+                    messages.add("ERROR P: [Periodo:" + producto.getIdTecsupPeriodo().getValue() + " - Curso:" + producto.getIdTecsupCurso().getValue() + "] " + e.getMessage());
                 }
             }
 
@@ -117,11 +119,11 @@ public class SynchronizationCrmSchedule {
                         throw new WebServiceException(result.getStrMensajeError().getValue());
 
                     log.info("sendInscripcion success!");
-                    messages.add("OK: [" + inscripcion.getStrIdCursoTecsup().getValue() + ":" + inscripcion.getStrIdTerminoTecsup().getValue() + ":" + inscripcion.getStrNumeroDocContacto().getValue() + "] Inscripcion Actualizado!");
+                    messages.add("OK: [Curso:" + inscripcion.getStrIdCursoTecsup().getValue() + " - Termino:" + inscripcion.getStrIdTerminoTecsup().getValue() + " - NumeroDoc:" + inscripcion.getStrNumeroDocContacto().getValue() + "] Inscripcion Actualizado!");
 
                 } catch (Exception e) {
                     log.error(e, e);
-                    messages.add("ERROR I: [" + inscripcion.getStrIdCursoTecsup().getValue() + ":" + inscripcion.getStrIdTerminoTecsup().getValue() + ":" + inscripcion.getStrNumeroDocContacto().getValue() + "] " + e.getMessage());
+                    messages.add("ERROR I: [Curso:" + inscripcion.getStrIdCursoTecsup().getValue() + " - Termino" + inscripcion.getStrIdTerminoTecsup().getValue() + " - NumeroDoc:" + inscripcion.getStrNumeroDocContacto().getValue() + "] " + e.getMessage());
                 }
             }
 

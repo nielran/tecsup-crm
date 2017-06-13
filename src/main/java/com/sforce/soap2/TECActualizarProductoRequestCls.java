@@ -9,10 +9,7 @@
 package com.sforce.soap2;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -487,4 +484,14 @@ public class TECActualizarProductoRequestCls {
         this.tipo = value;
     }
 
+    @XmlTransient
+    private String update;
+
+    public String getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(String update) {
+        this.update = update;
+    }
 }

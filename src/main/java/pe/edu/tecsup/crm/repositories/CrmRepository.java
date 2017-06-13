@@ -12,10 +12,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -59,11 +56,12 @@ public class CrmRepository {
                 producto.setHoras(factory.createTECActualizarProductoRequestClsHoras(((BigDecimal)record.get("HORAS")).intValue()));
                 producto.setIdTecsupArea(factory.createTECActualizarProductoRequestClsIdTecsupArea(((BigDecimal)record.get("IDTECSUPAREA")).toString()));
                 producto.setIdTecsupCurso(factory.createTECActualizarProductoRequestClsIdTecsupCurso(((BigDecimal)record.get("IDTECSUPCURSO")).toString()));
-                producto.setIdTecsupPeriodo(factory.createTECActualizarProductoRequestClsIdTecsupPeriodo(((BigDecimal)record.get("IDTECSUPPERIODO")).toString()));
+                producto.setIdTecsupPeriodo(factory.createTECActualizarProductoRequestClsIdTecsupPeriodo((String)record.get("IDTECSUPPERIODO")));
                 producto.setNombreCurso(factory.createTECActualizarProductoRequestClsNombreCurso((String)record.get("NOMBRECURSO")));
                 producto.setNombrePeriodo(factory.createTECActualizarProductoRequestClsNombrePeriodo((String)record.get("NOMBREPERIODO")));
                 producto.setSeccion(factory.createTECActualizarProductoRequestClsSeccion((String)record.get("SECCION")));
                 producto.setTipo(factory.createTECActualizarProductoRequestClsTipo((String)record.get("TIPO")));
+                producto.setUpdate((String)record.get("COLUM_UPDATE"));
 
                 productos.add(producto);
             }
@@ -71,6 +69,16 @@ public class CrmRepository {
             log.info("productos: " + productos);
 
             return productos;
+        }catch (Exception e){
+            log.error(e, e);
+            throw e;
+        }
+    }
+
+    public void checkProducto(String sql) throws Exception {
+        log.info("checkProducto: " + sql);
+        try {
+            jdbcTemplate.update(sql);
         }catch (Exception e){
             log.error(e, e);
             throw e;
