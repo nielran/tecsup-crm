@@ -37,7 +37,7 @@ public class SynchronizationCrmSchedule {
     @Autowired
     private InscripcionClient inscripcionClient;
 
-    @Scheduled(cron="0 0 1 * * *")
+    @Scheduled(cron="0 0 2 * * *")
     public void run() throws Exception{
         log.info("run");
 
@@ -111,7 +111,7 @@ public class SynchronizationCrmSchedule {
 
     }
 
-    @Scheduled(cron="0 0 2 * * *")
+    @Scheduled(cron="0 0 3 * * *")
     public void runInscritos() throws Exception{
         log.info("run");
 
