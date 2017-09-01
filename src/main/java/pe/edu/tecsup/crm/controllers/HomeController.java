@@ -35,4 +35,12 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/test2")
+    public String test2() throws Exception {
+        log.info("calling test2");
+
+        synchronizationCrmSchedule.runInscritos();
+
+        return "index";
+    }
 }

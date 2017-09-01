@@ -36,7 +36,9 @@ import javax.xml.bind.annotation.*;
  *         &lt;element name="IdTecsupPeriodo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="NombreCurso" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="NombrePeriodo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="Oficina" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="Seccion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="Sede" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="Tipo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -62,8 +64,11 @@ import javax.xml.bind.annotation.*;
     "idTecsupPeriodo",
     "nombreCurso",
     "nombrePeriodo",
+    "oficina",
     "seccion",
-    "tipo"
+    "sede",
+    "tipo",
+    "tipoOperacion"
 })
 public class TECActualizarProductoRequestCls {
 
@@ -95,10 +100,64 @@ public class TECActualizarProductoRequestCls {
     protected JAXBElement<String> nombreCurso;
     @XmlElementRef(name = "NombrePeriodo", namespace = "http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", type = JAXBElement.class, required = false)
     protected JAXBElement<String> nombrePeriodo;
+    @XmlElementRef(name = "Oficina", namespace = "http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> oficina;
     @XmlElementRef(name = "Seccion", namespace = "http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", type = JAXBElement.class, required = false)
     protected JAXBElement<String> seccion;
+    @XmlElementRef(name = "Sede", namespace = "http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> sede;
     @XmlElementRef(name = "Tipo", namespace = "http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", type = JAXBElement.class, required = false)
     protected JAXBElement<String> tipo;
+    @XmlElementRef(name = "TipoOperacion", namespace = "http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> tipoOperacion;
+
+    /**
+     * Obtiene el valor de la propiedad oficina.
+     *
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *
+     */
+    public JAXBElement<String> getOficina() {
+        return oficina;
+    }
+
+    /**
+     * Define el valor de la propiedad oficina.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *
+     */
+    public void setOficina(JAXBElement<String> value) {
+        this.oficina = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad sede.
+     *
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *
+     */
+    public JAXBElement<String> getSede() {
+        return sede;
+    }
+
+    /**
+     * Define el valor de la propiedad sede.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *
+     */
+    public void setSede(JAXBElement<String> value) {
+        this.sede = value;
+    }
 
     /**
      * Obtiene el valor de la propiedad abreviatura.
@@ -482,6 +541,15 @@ public class TECActualizarProductoRequestCls {
      */
     public void setTipo(JAXBElement<String> value) {
         this.tipo = value;
+    }
+
+
+    public JAXBElement<String> getTipoOperacion() {
+        return tipoOperacion;
+    }
+
+    public void setTipoOperacion(JAXBElement<String> tipoOperacion) {
+        this.tipoOperacion = tipoOperacion;
     }
 
     @XmlTransient

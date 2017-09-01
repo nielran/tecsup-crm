@@ -368,14 +368,18 @@ All Rights Reserved
                 <soap:fault name="InvalidIdFault" use="literal"/>
             </fault>
         </operation>
-        
+
     </binding>
 
     <!-- Soap Service Endpoint -->
     <service name="SforceService">
         <documentation>Sforce SOAP API</documentation>
         <port binding="tns:SoapBinding" name="Soap">
+            <!-- -->
             <soap:address location="https://login.salesforce.com/services/Soap/u/39.0"/>
+            <!--
+            <soap:address location="https://cs13.salesforce.com/services/Soap/u/39.0"/>
+            -->
         </port>
     </service>
 </definitions>

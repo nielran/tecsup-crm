@@ -4,11 +4,9 @@ import com.sforce.soap1.Login;
 import com.sforce.soap1.LoginResponse;
 import com.sforce.soap1.LoginResult;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Component;
-import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
 /**
@@ -30,7 +28,8 @@ public class LoginClient extends WebServiceGatewaySupport {
         jaxb2Marshaller.setContextPath("com.sforce.soap1");
         getWebServiceTemplate().setMarshaller(jaxb2Marshaller);
         getWebServiceTemplate().setUnmarshaller(jaxb2Marshaller);
-        getWebServiceTemplate().setDefaultUri("https://login.salesforce.com/services/Soap/u/39.0");
+        //getWebServiceTemplate().setDefaultUri("https://login.salesforce.com/services/Soap/u/39.0");
+        getWebServiceTemplate().setDefaultUri("https://test.salesforce.com/services/Soap/u/39.0");
     }
 
     public String login() {

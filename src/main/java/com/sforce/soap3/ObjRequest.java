@@ -9,10 +9,7 @@
 package com.sforce.soap3;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -43,6 +40,9 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "objRequest", propOrder = {
+    "strTipoVenta",
+    "strMoneda",
+    "numMonto",
     "strAuspiciador",
     "strConvenio",
     "strEstado",
@@ -54,6 +54,12 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ObjRequest {
 
+    @XmlElementRef(name = "strTipoVenta", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> strTipoVenta;
+    @XmlElementRef(name = "strMoneda", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> strMoneda;
+    @XmlElementRef(name = "numMonto", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
+    protected JAXBElement<Double> numMonto;
     @XmlElementRef(name = "strAuspiciador", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
     protected JAXBElement<String> strAuspiciador;
     @XmlElementRef(name = "strConvenio", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
@@ -263,4 +269,31 @@ public class ObjRequest {
         this.strTipoOperacion = value;
     }
 
+
+    public JAXBElement<String> getStrMoneda() { return strMoneda; }
+
+    public void setStrMoneda(JAXBElement<String> strMoneda) { this.strMoneda = strMoneda; }
+
+    public JAXBElement<Double> getNumMonto() { return numMonto; }
+
+    public void setNumMonto(JAXBElement<Double> numMonto) { this.numMonto = numMonto; }
+
+    public JAXBElement<String> getStrTipoVenta() {
+        return strTipoVenta;
+    }
+
+    public void setStrTipoVenta(JAXBElement<String> strTipoVenta) {
+        this.strTipoVenta = strTipoVenta;
+    }
+
+    @XmlTransient
+    private String update;
+
+    public String getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(String update) {
+        this.update = update;
+    }
 }

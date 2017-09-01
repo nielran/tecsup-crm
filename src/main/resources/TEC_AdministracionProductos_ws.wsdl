@@ -21,8 +21,11 @@
      <xsd:element name="IdTecsupPeriodo" minOccurs="0" type="xsd:string" nillable="true"/>
      <xsd:element name="NombreCurso" minOccurs="0" type="xsd:string" nillable="true"/>
      <xsd:element name="NombrePeriodo" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="Oficina" minOccurs="0" type="xsd:string" nillable="true"/>
      <xsd:element name="Seccion" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="Sede" minOccurs="0" type="xsd:string" nillable="true"/>
      <xsd:element name="Tipo" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="TipoOperacion" minOccurs="0" type="xsd:string" nillable="true"/>
     </xsd:sequence>
    </xsd:complexType>
   </xsd:schema>
@@ -96,7 +99,9 @@
  <service name="TEC_AdministracionProductos_wsService">
   <documentation></documentation>
   <port binding="tns:TEC_AdministracionProductos_wsBinding" name="TEC_AdministracionProductos_ws">
+
    <soap:address location="https://na40.salesforce.com/services/Soap/class/TEC_AdministracionProductos_ws"/>
+
   </port>
  </service>
 </definitions>

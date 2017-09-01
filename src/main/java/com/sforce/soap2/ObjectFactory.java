@@ -50,8 +50,11 @@ public class ObjectFactory {
     private final static QName _TECActualizarProductoRequestClsIdTecsupPeriodo_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", "IdTecsupPeriodo");
     private final static QName _TECActualizarProductoRequestClsNombreCurso_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", "NombreCurso");
     private final static QName _TECActualizarProductoRequestClsNombrePeriodo_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", "NombrePeriodo");
+    private final static QName _TECActualizarProductoRequestClsOficina_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", "Oficina");
     private final static QName _TECActualizarProductoRequestClsSeccion_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", "Seccion");
+    private final static QName _TECActualizarProductoRequestClsSede_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", "Sede");
     private final static QName _TECActualizarProductoRequestClsTipo_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", "Tipo");
+    private final static QName _TECActualizarProductoRequestClsTipoOperacion_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", "TipoOperacion");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.sforce.soap2
@@ -280,6 +283,23 @@ public class ObjectFactory {
         return new JAXBElement<String>(_TECActualizarProductoRequestClsSeccion_QNAME, String.class, TECActualizarProductoRequestCls.class, value);
     }
 
+    /* Oficina
+
+     */
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", name = "Oficina", scope = TECActualizarProductoRequestCls.class)
+    public JAXBElement<String> createTECActualizarProductoRequestClsOficina(String value) {
+        return new JAXBElement<String>(_TECActualizarProductoRequestClsOficina_QNAME, String.class, TECActualizarProductoRequestCls.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     *
+     */
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", name = "Sede", scope = TECActualizarProductoRequestCls.class)
+    public JAXBElement<String> createTECActualizarProductoRequestClsSede(String value) {
+        return new JAXBElement<String>(_TECActualizarProductoRequestClsSede_QNAME, String.class, TECActualizarProductoRequestCls.class, value);
+    }
+
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
@@ -289,4 +309,8 @@ public class ObjectFactory {
         return new JAXBElement<String>(_TECActualizarProductoRequestClsTipo_QNAME, String.class, TECActualizarProductoRequestCls.class, value);
     }
 
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_Actualizar_ProductoRequest_cls", name = "TipoOperacion", scope = TECActualizarProductoRequestCls.class)
+    public JAXBElement<String> createTECActualizarProductoRequestClsTipoOperacion(String value) {
+        return new JAXBElement<String>(_TECActualizarProductoRequestClsTipoOperacion_QNAME, String.class, TECActualizarProductoRequestCls.class, value);
+    }
 }

@@ -68,4 +68,5 @@ public class ProductosAdquiridosPorCliente {
         this.infoCourse = value;
     }
 
+
 }

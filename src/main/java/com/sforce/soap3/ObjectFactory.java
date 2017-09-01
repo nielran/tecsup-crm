@@ -31,6 +31,9 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _ObjRequestStrTipoVenta_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strTipoVenta");
+    private final static QName _ObjRequestStrMoneda_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strMoneda");
+    private final static QName _ObjRequestNumMonto_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "numMonto");
     private final static QName _ObjResponseBlnResultado_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "blnResultado");
     private final static QName _ObjResponseStrIdCourseEnrollment_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strIdCourseEnrollment");
     private final static QName _ObjResponseStrMensajeError_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strMensajeError");
@@ -189,4 +192,18 @@ public class ObjectFactory {
         return new JAXBElement<String>(_ObjRequestStrTipoOperacion_QNAME, String.class, ObjRequest.class, value);
     }
 
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "strMoneda", scope = ObjRequest.class)
+    public JAXBElement<String> createObjRequestStrMoneda(String value) {
+        return new JAXBElement<String>(_ObjRequestStrMoneda_QNAME, String.class, ObjRequest.class, value);
+    }
+
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "numMonto", scope = ObjRequest.class)
+    public JAXBElement<Double> createObjRequestNumMonto(Double value) {
+        return new JAXBElement<Double>(_ObjRequestNumMonto_QNAME, Double.class, ObjRequest.class, value);
+    }
+
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "strTipoVenta", scope = ObjRequest.class)
+    public JAXBElement<String> createObjRequestStrTipoVenta(String value) {
+        return new JAXBElement<String>(_ObjRequestStrTipoVenta_QNAME, String.class, ObjRequest.class, value);
+    }
 }

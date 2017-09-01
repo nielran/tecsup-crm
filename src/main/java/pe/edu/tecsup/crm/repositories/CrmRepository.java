@@ -61,6 +61,9 @@ public class CrmRepository {
                 producto.setNombrePeriodo(factory.createTECActualizarProductoRequestClsNombrePeriodo((String)record.get("NOMBREPERIODO")));
                 producto.setSeccion(factory.createTECActualizarProductoRequestClsSeccion((String)record.get("SECCION")));
                 producto.setTipo(factory.createTECActualizarProductoRequestClsTipo((String)record.get("TIPO")));
+                producto.setOficina(factory.createTECActualizarProductoRequestClsOficina((String)record.get("OFICINA")));
+                producto.setSede(factory.createTECActualizarProductoRequestClsSede((String)record.get("SEDE")));
+                producto.setTipoOperacion(factory.createTECActualizarProductoRequestClsTipoOperacion((String)record.get("TIPOOPERACION")));
                 producto.setUpdate((String)record.get("COLUM_UPDATE"));
 
                 productos.add(producto);
@@ -114,7 +117,10 @@ public class CrmRepository {
                 inscripcion.setStrEstado(factory.createObjRequestStrEstado((String)record.get("ESTADO")));
                 inscripcion.setStrAuspiciador(factory.createObjRequestStrAuspiciador((String)record.get("AUSPICIADOR")));
                 inscripcion.setStrConvenio(factory.createObjRequestStrConvenio((String)record.get("CONVENIO")));
-
+                inscripcion.setStrMoneda(factory.createObjRequestStrMoneda((String)record.get("MONEDA")));
+                inscripcion.setNumMonto(factory.createObjRequestNumMonto(Double.valueOf( ((String)record.get("MONTO")).replace(",",".") )));
+                inscripcion.setStrTipoVenta(factory.createObjRequestStrTipoVenta((String)record.get("TIPOVENTA")));
+                inscripcion.setUpdate((String)record.get("COLUM_UPDATE"));
                 inscripciones.add(inscripcion);
             }
 

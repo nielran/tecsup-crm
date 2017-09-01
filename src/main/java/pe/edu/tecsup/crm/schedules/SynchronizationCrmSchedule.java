@@ -46,6 +46,7 @@ public class SynchronizationCrmSchedule {
         try {
 
             String sessionid = loginClient.login();
+            String sUpdate = "";
             log.info("sessionid : " + sessionid);
 
             log.info("Productos processing ...");
@@ -82,7 +83,8 @@ public class SynchronizationCrmSchedule {
                     if (!result.getResultado().getValue())
                         throw new WebServiceException(result.getError().getValue());
 
-                    crmService.checkProducto(producto.getUpdate());
+                    sUpdate = producto.getUpdate().replace("[ID_SALESFORCE]","'" + result.getIdCurso().getValue().trim() + "'");
+                    crmService.checkProducto(sUpdate);
 
                     log.info("sendProducto success!");
                     messages.add("OK: [Periodo:" + producto.getIdTecsupPeriodo().getValue() + " - Curso:" + producto.getIdTecsupCurso().getValue() + "] Producto Actualizado!");
@@ -95,18 +97,33 @@ public class SynchronizationCrmSchedule {
 
             log.info("Inscripciones processing ...");
 
-            // EXAMPLE INIT
-//            com.sforce.soap3.ObjectFactory factory2 = new com.sforce.soap3.ObjectFactory();
-//
-//            ObjRequest inscripcion = factory2.createObjRequest();
-//            inscripcion.setStrEstado(factory2.createObjRequestStrEstado("1"));
-//            inscripcion.setStrIdCursoTecsup(factory2.createObjRequestStrIdCursoTecsup("159357"));
-//            inscripcion.setStrIdTerminoTecsup(factory2.createObjRequestStrIdTerminoTecsup("183"));
-//            inscripcion.setStrNumeroDocContacto(factory2.createObjRequestStrNumeroDocContacto("42545606")); // <---
-//            inscripcion.setStrTipoDocContacto(factory2.createObjRequestStrTipoDocContacto("D"));
-//            inscripcion.setStrTipoOperacion(factory2.createObjRequestStrTipoOperacion("1"));
-//            // FALTA 2 MÁS ....
-            // EXAMPLE END
+
+        } catch (Exception e) {
+            log.error(e, e);
+            messages.add("ERROR CRITICAL: " + e.getMessage());
+        }
+
+        try {
+            crmService.saveLogs(messages);
+        } catch (Exception e) {
+            log.error(e, e);
+        }
+
+    }
+
+    @Scheduled(cron="0 0 2 * * *")
+    public void runInscritos() throws Exception{
+        log.info("run");
+
+        List<String> messages = new ArrayList<>();
+
+        try {
+
+            String sessionid = loginClient.login();
+            String sUpdate = "";
+            log.info("sessionid : " + sessionid);
+
+            log.info("Inscripciones processing ...");
 
             List<ObjRequest> inscripciones = crmService.inscripciones();
             log.info(inscripciones.size());
@@ -117,6 +134,10 @@ public class SynchronizationCrmSchedule {
 
                     if (!result.getBlnResultado().getValue())
                         throw new WebServiceException(result.getStrMensajeError().getValue());
+
+                    sUpdate = inscripcion.getUpdate();
+                    if(sUpdate!=null && !("".equals(sUpdate)))
+                        crmService.checkProducto(sUpdate);
 
                     log.info("sendInscripcion success!");
                     messages.add("OK: [Curso:" + inscripcion.getStrIdCursoTecsup().getValue() + " - Termino:" + inscripcion.getStrIdTerminoTecsup().getValue() + " - NumeroDoc:" + inscripcion.getStrNumeroDocContacto().getValue() + "] Inscripcion Actualizado!");
@@ -141,5 +162,4 @@ public class SynchronizationCrmSchedule {
         }
 
     }
-
 }

@@ -14,6 +14,9 @@
    </xsd:element>
    <xsd:complexType name="objRequest">
     <xsd:sequence>
+     <xsd:element name="strTipoVenta" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="strMoneda" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="numMonto" minOccurs="0" type="xsd:double" nillable="true"/>
      <xsd:element name="strAuspiciador" minOccurs="0" type="xsd:string" nillable="true"/>
      <xsd:element name="strConvenio" minOccurs="0" type="xsd:string" nillable="true"/>
      <xsd:element name="strEstado" minOccurs="0" type="xsd:string" nillable="true"/>
@@ -80,7 +83,8 @@
  <service name="TEC_ProductosAdquiridosPorCliente_wsService">
   <documentation></documentation>
   <port binding="tns:TEC_ProductosAdquiridosPorCliente_wsBinding" name="TEC_ProductosAdquiridosPorCliente_ws">
-   <soap:address location="https://na40.salesforce.com/services/Soap/class/TEC_ProductosAdquiridosPorCliente_ws"/>
+   <soap:address location="https://cs13.salesforce.com/services/Soap/class/TEC_ProductosAdquiridosPorCliente_ws"/>
+
   </port>
  </service>
 </definitions>
