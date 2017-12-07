@@ -17,13 +17,14 @@ public class ProductoClient  extends WebServiceGatewaySupport {
 
     private static final Logger log = Logger.getLogger(ProductoClient.class);
 
+
     public ProductoClient(){
         Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
         jaxb2Marshaller.setContextPath("com.sforce.soap2");
         getWebServiceTemplate().setMarshaller(jaxb2Marshaller);
         getWebServiceTemplate().setUnmarshaller(jaxb2Marshaller);
-        //getWebServiceTemplate().setDefaultUri("https://na40.salesforce.com/services/Soap/class/TEC_AdministracionProductos_ws");
-        getWebServiceTemplate().setDefaultUri("https://cs13.salesforce.com/services/Soap/class/TEC_AdministracionProductos_ws");
+        getWebServiceTemplate().setDefaultUri("https://na40.salesforce.com/services/Soap/class/TEC_AdministracionProductos_ws");
+        //getWebServiceTemplate().setDefaultUri("https://cs13.salesforce.com/services/Soap/class/TEC_AdministracionProductos_ws");
     }
 
     public TECActualizarProductoResponseCls sendProducto(String sessionid, TECActualizarProductoRequestCls producto){
