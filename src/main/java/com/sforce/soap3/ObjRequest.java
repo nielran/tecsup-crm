@@ -40,6 +40,8 @@ import javax.xml.bind.annotation.*;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "objRequest", propOrder = {
+    "strIDInscriptor","strFecInscripcion",
+    "strMotivoAnulacion",
     "strTipoVenta",
     "strMoneda",
     "numMonto",
@@ -54,6 +56,12 @@ import javax.xml.bind.annotation.*;
 })
 public class ObjRequest {
 
+    @XmlElementRef(name = "strIDInscriptor", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> strIDInscriptor;
+    @XmlElementRef(name = "strFecInscripcion", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> strFecInscripcion;
+    @XmlElementRef(name = "strMotivoAnulacion", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> strMotivoAnulacion;
     @XmlElementRef(name = "strTipoVenta", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
     protected JAXBElement<String> strTipoVenta;
     @XmlElementRef(name = "strMoneda", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
@@ -286,6 +294,30 @@ public class ObjRequest {
         this.strTipoVenta = strTipoVenta;
     }
 
+    public JAXBElement<String> getStrMotivoAnulacion() {
+        return strMotivoAnulacion;
+    }
+
+    public void setStrMotivoAnulacion(JAXBElement<String> strMotivoAnulacion) {
+        this.strMotivoAnulacion = strMotivoAnulacion;
+    }
+
+    public JAXBElement<String> getStrFecInscripcion() {
+        return strFecInscripcion;
+    }
+
+    public void setStrFecInscripcion(JAXBElement<String> strFecInscripcion) {
+        this.strFecInscripcion = strFecInscripcion;
+    }
+
+    public JAXBElement<String> getStrIDInscriptor() {
+        return strIDInscriptor;
+    }
+
+    public void setStrIDInscriptor(JAXBElement<String> strIDInscriptor) {
+        this.strIDInscriptor = strIDInscriptor;
+    }
+
     @XmlTransient
     private String update;
 
@@ -296,4 +328,6 @@ public class ObjRequest {
     public void setUpdate(String update) {
         this.update = update;
     }
+
+
 }

@@ -31,6 +31,9 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _ObjRequestStrIDInscriptor_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strIDInscriptor");
+    private final static QName _ObjRequestStrFecInscripcion_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strFecInscripcion");
+    private final static QName _ObjRequestStrMotivoAnulacion_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strMotivoAnulacion");
     private final static QName _ObjRequestStrTipoVenta_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strTipoVenta");
     private final static QName _ObjRequestStrMoneda_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strMoneda");
     private final static QName _ObjRequestNumMonto_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "numMonto");
@@ -205,5 +208,20 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "strTipoVenta", scope = ObjRequest.class)
     public JAXBElement<String> createObjRequestStrTipoVenta(String value) {
         return new JAXBElement<String>(_ObjRequestStrTipoVenta_QNAME, String.class, ObjRequest.class, value);
+    }
+
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "strMotivoAnulacion", scope = ObjRequest.class)
+    public JAXBElement<String> createObjRequestStrMotivoAnulacion(String value) {
+        return new JAXBElement<String>(_ObjRequestStrMotivoAnulacion_QNAME, String.class, ObjRequest.class, value);
+    }
+
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "strFecInscripcion", scope = ObjRequest.class)
+    public JAXBElement<String> createObjRequestStrFecInscripcion(String value) {
+        return new JAXBElement<String>(_ObjRequestStrFecInscripcion_QNAME, String.class, ObjRequest.class, value);
+    }
+
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "strIDInscriptor", scope = ObjRequest.class)
+    public JAXBElement<String> createObjRequestStrIDInscriptor(String value) {
+        return new JAXBElement<String>(_ObjRequestStrIDInscriptor_QNAME, String.class, ObjRequest.class, value);
     }
 }

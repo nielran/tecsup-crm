@@ -3,6 +3,8 @@ package pe.edu.tecsup.crm.repositories;
 import com.sforce.soap2.TECActualizarProductoRequestCls;
 import com.sforce.soap3.ObjRequest;
 import com.sforce.soap3.ObjectFactory;
+import com.sforce.soap4.ObjRequest4;
+//import com.sforce.soap4.ObjectFactory4;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -88,6 +90,17 @@ public class CrmRepository {
         }
     }
 
+    public void checkContacto(String idContacto, String codSujeto) throws Exception {
+        log.info("checkContacto: " + idContacto + " - sujeto:"+ codSujeto);
+        String sql = "UPDATE GENERAL.GEN_SUJETO SET migrasf='1',fecmigrasf=sysdate,IDSF='" + idContacto + "' where codsujeto=" + codSujeto + " and nvl(migrasf,'0')='0'";
+        try {
+            jdbcTemplate.update(sql);
+        }catch (Exception e){
+            log.error(e, e);
+            throw e;
+        }
+    }
+
     public List<ObjRequest> inscripciones() throws Exception {
         log.info("inscripciones");
         try {
@@ -120,6 +133,9 @@ public class CrmRepository {
                 inscripcion.setStrMoneda(factory.createObjRequestStrMoneda((String)record.get("MONEDA")));
                 inscripcion.setNumMonto(factory.createObjRequestNumMonto(Double.valueOf( ((String)record.get("MONTO")).replace(",",".") )));
                 inscripcion.setStrTipoVenta(factory.createObjRequestStrTipoVenta((String)record.get("TIPOVENTA")));
+                inscripcion.setStrMotivoAnulacion(factory.createObjRequestStrMotivoAnulacion((String)record.get("MOTIVOANULACION")));
+                inscripcion.setStrFecInscripcion(factory.createObjRequestStrFecInscripcion((String)record.get("FECINSCRIPCION")));
+                inscripcion.setStrIDInscriptor(factory.createObjRequestStrIDInscriptor((String)record.get("IDSF_INSCRIPTOR")));
                 inscripcion.setUpdate((String)record.get("COLUM_UPDATE"));
                 inscripciones.add(inscripcion);
             }
@@ -146,6 +162,62 @@ public class CrmRepository {
             }
         }catch (Exception e){
             log.error(e, e);
+        }
+    }
+
+
+    public List<ObjRequest4> contactos() throws Exception {
+        log.info("contactos");
+        try {
+
+            SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate);
+
+            simpleJdbcCall.withSchemaName("DOCENCIA").withCatalogName("SDOC").withProcedureName("CONTACTOS_SF_FINAL");
+
+            SqlParameterSource in = new MapSqlParameterSource();
+
+            Map<String, Object> out = simpleJdbcCall.execute(in);
+            log.info(out);
+
+            List<Map<String, Object>> recordset = (ArrayList<Map<String, Object>>) out.get("S_C_RECORDSET");
+            log.info("Length of retrieved batches from database = "+recordset);
+
+            List<ObjRequest4> contactos = new ArrayList<>();
+            com.sforce.soap4.ObjectFactory factory = new com.sforce.soap4.ObjectFactory();
+
+            for(Map<String, Object> record : recordset) {
+                ObjRequest4 contacto = factory.createObjRequest();
+                contacto.setStrLastName(factory.createObjRequestStrLastName((String)record.get("LASTNAME")));
+                contacto.setStrApellidoMaterno(factory.createObjRequestStrApellidoMaterno((String)record.get("CRM_APELLIDO_MATERNO__C")));
+                contacto.setStrPrimerNombre(factory.createObjRequestStrPrimerNombre((String)record.get("FIRSTNAME")));
+                contacto.setStrSegundoNombre(factory.createObjRequestStrSegundoNombre((String)record.get("CRM_SEGUNDO_NOMBRE__C")));
+                contacto.setStrTipoDocumento(factory.createObjRequestStrTipoDocumento((String)record.get("CRM_TIPO_DOCUMENTO__C")));
+                contacto.setStrNumDocumento(factory.createObjRequestStrNumDocumento((String)record.get("CRM_NUMERO_DOCUMENTO__C")));
+
+                contacto.setStrCelular(factory.createObjRequestStrCelular((String)record.get("MOBILEPHONE")));
+                contacto.setStrTelefonoCasa(factory.createObjRequestStrTelefonoCasa((String)record.get("HOMEPHONE")));
+                contacto.setStrEmail(factory.createObjRequestStrEmail((String)record.get("EMAIL")));
+                contacto.setStrLeadSource(factory.createObjRequestStrLeadSource((String)record.get("LEADSOURCE")));
+                contacto.setStrOwnerId(factory.createObjRequestStrOwnerId((String)record.get("OWNERID")));
+                contacto.setStrGenero(factory.createObjRequestStrGenero((String)record.get("HED__GENDER__C")));
+                contacto.setStrFecNac(factory.createObjRequestStrFecNac((String)record.get("CRM_FECHA_NACIMIENTO__C")));
+                contacto.setStrDomicilio(factory.createObjRequestStrDomicilio((String)record.get("CRM_DOMICILIO1__C")));
+                contacto.setStrEstadoCivil(factory.createObjRequestStrEstadoCivil((String)record.get("CRM_ESTADO_CIVIL__C")));
+                contacto.setStrFecAceptaLey(factory.createObjRequestStrFecAceptaLey((String)record.get("CRM_FECHA_DATOS_PERSONALES__C")));
+                contacto.setStrSede(factory.createObjRequestStrSede((String)record.get("CRM_SEDE__C")));
+                contacto.setStrOficina(factory.createObjRequestStrOficina((String)record.get("CRM_OFICINA__C")));
+                contacto.setStrTipoPersona(factory.createObjRequestStrTipoPersona((String)record.get("TIPO_DE_PERSONA__C")));
+                contacto.setStrRecordTypeId(factory.createObjRequestStrRecordTypeId((String)record.get("RECORDTYPEID")));
+                contacto.setStrCodPersona(factory.createObjRequestStrCodPersona((String)record.get("CRM_CODIGOALUMNO__C")));
+
+                contactos.add(contacto);
+            }
+            log.info("contactos: " + contactos);
+
+            return contactos;
+        }catch (Exception e){
+            log.error(e, e);
+            throw e;
         }
     }
 

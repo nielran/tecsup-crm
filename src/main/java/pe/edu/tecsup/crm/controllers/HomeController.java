@@ -26,6 +26,7 @@ public class HomeController {
 	@Autowired
     private SynchronizationCrmSchedule synchronizationCrmSchedule;
 
+
     @GetMapping("/test")
     public String test() throws Exception {
         log.info("calling test");
@@ -35,11 +36,22 @@ public class HomeController {
         return "index";
     }
 
+
+
     @GetMapping("/test2")
     public String test2() throws Exception {
         log.info("calling test2");
 
         synchronizationCrmSchedule.runInscritos();
+
+        return "index";
+    }
+
+    @GetMapping("/test3")
+    public String test3() throws Exception {
+        log.info("calling test3");
+
+        synchronizationCrmSchedule.runContactos();
 
         return "index";
     }

@@ -99,9 +99,12 @@
  <service name="TEC_AdministracionProductos_wsService">
   <documentation></documentation>
   <port binding="tns:TEC_AdministracionProductos_wsBinding" name="TEC_AdministracionProductos_ws">
-
+<!---->
    <soap:address location="https://na40.salesforce.com/services/Soap/class/TEC_AdministracionProductos_ws"/>
 
+   <!--
+   <soap:address location="https://cs13.salesforce.com/services/Soap/class/TEC_AdministracionProductos_ws"/>
+-->
   </port>
  </service>
 </definitions>

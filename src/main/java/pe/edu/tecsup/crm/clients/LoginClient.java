@@ -28,8 +28,8 @@ public class LoginClient extends WebServiceGatewaySupport {
         jaxb2Marshaller.setContextPath("com.sforce.soap1");
         getWebServiceTemplate().setMarshaller(jaxb2Marshaller);
         getWebServiceTemplate().setUnmarshaller(jaxb2Marshaller);
-        //getWebServiceTemplate().setDefaultUri("https://login.salesforce.com/services/Soap/u/39.0");
-        getWebServiceTemplate().setDefaultUri("https://test.salesforce.com/services/Soap/u/39.0");
+        getWebServiceTemplate().setDefaultUri("https://login.salesforce.com/services/Soap/u/39.0");
+        //getWebServiceTemplate().setDefaultUri("https://test.salesforce.com/services/Soap/u/39.0");
     }
 
     public String login() {

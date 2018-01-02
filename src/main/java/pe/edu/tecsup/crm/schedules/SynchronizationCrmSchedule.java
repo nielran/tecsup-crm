@@ -4,10 +4,13 @@ import com.sforce.soap2.TECActualizarProductoRequestCls;
 import com.sforce.soap2.TECActualizarProductoResponseCls;
 import com.sforce.soap3.ObjRequest;
 import com.sforce.soap3.ObjResponse;
+import com.sforce.soap4.ObjRequest4;
+import com.sforce.soap4.ObjResponse4;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import pe.edu.tecsup.crm.clients.ContactoClient;
 import pe.edu.tecsup.crm.clients.InscripcionClient;
 import pe.edu.tecsup.crm.clients.LoginClient;
 import pe.edu.tecsup.crm.clients.ProductoClient;
@@ -37,7 +40,10 @@ public class SynchronizationCrmSchedule {
     @Autowired
     private InscripcionClient inscripcionClient;
 
-    @Scheduled(cron="0 0 2 * * *")
+    @Autowired
+    private ContactoClient contactoClient;
+
+    @Scheduled(cron="0 0 8-21 * * MON-FRI")
     public void run() throws Exception{
         log.info("run");
 
@@ -81,9 +87,13 @@ public class SynchronizationCrmSchedule {
                     TECActualizarProductoResponseCls result = productoClient.sendProducto(sessionid, producto);
 
                     if (!result.getResultado().getValue())
-                        throw new WebServiceException(result.getError().getValue());
+                        throw new WebServiceException(result.getError(  ).getValue());
 
-                    sUpdate = producto.getUpdate().replace("[ID_SALESFORCE]","'" + result.getIdCurso().getValue().trim() + "'");
+                    log.info("CODPROACTIVIDAD:" + producto.getSeccion().getValue());
+                    log.info("PERIODO:" + producto.getIdTecsupPeriodo().getValue());
+                    log.info("ID:" + result.getIdOfertaCurso().getValue().trim());
+
+                    sUpdate = producto.getUpdate().replace("[ID_SALESFORCE]","'" + result.getIdOfertaCurso().getValue().trim() + "'");
                     crmService.checkProducto(sUpdate);
 
                     log.info("sendProducto success!");
@@ -111,7 +121,7 @@ public class SynchronizationCrmSchedule {
 
     }
 
-    @Scheduled(cron="0 0 3 * * *")
+    @Scheduled(cron="0 0 9,11,13,15,17,19,21 * * *")
     public void runInscritos() throws Exception{
         log.info("run");
 
@@ -151,6 +161,54 @@ public class SynchronizationCrmSchedule {
             messages.add("OK FINISH PROCESS");
 
         } catch (Exception e) {
+            log.error(e, e);
+            messages.add("ERROR CRITICAL: " + e.getMessage());
+        }
+
+        try {
+            crmService.saveLogs(messages);
+        } catch (Exception e) {
+            log.error(e, e);
+        }
+
+    }
+
+    @Scheduled(cron="0 0 8,10,12,14,16,18,20 * * *")
+    public void runContactos() throws Exception{
+        log.info("runContactos");
+
+        List<String> messages = new ArrayList<>();
+        try{
+            String sessionid = loginClient.login();
+            String sUpdate = "";
+            log.info("sessionid : " + sessionid);
+
+            log.info("Contacts processing ...");
+
+            List<ObjRequest4> contactos = crmService.contactos();
+            log.info(contactos.size());
+
+            for(ObjRequest4 contacto:contactos){
+                try{
+                    ObjResponse4 result = contactoClient.sendContacto(sessionid,contacto);
+
+                    if (!result.getBlnResultado().getValue())
+                        throw new WebServiceException(result.getStrMensajeError().getValue());
+
+                    crmService.checkContacto(result.getStrIdContacto().getValue(),contacto.getStrCodPersona().getValue().toString());
+
+                    log.info("sendContacto success!");
+                    messages.add("OK: [Contacto:" + contacto.getStrLastName().getValue() + " - NumDoc:" + contacto.getStrNumDocumento().getValue() + "] Contacto creado!");
+
+                }catch (Exception e) {
+                    log.error(e, e);
+                    messages.add("ERROR C: [Contacto:" + contacto.getStrLastName().getValue() + " - NumDoc" + contacto.getStrNumDocumento().getValue() + "] " + e.getMessage());
+                }
+            }
+
+            messages.add("OK FINISH PROCESS");
+
+        }catch (Exception e) {
             log.error(e, e);
             messages.add("ERROR CRITICAL: " + e.getMessage());
         }
