@@ -15,6 +15,7 @@ import pe.edu.tecsup.crm.clients.InscripcionClient;
 import pe.edu.tecsup.crm.clients.LoginClient;
 import pe.edu.tecsup.crm.clients.ProductoClient;
 import pe.edu.tecsup.crm.services.CrmService;
+import pe.edu.tecsup.crm.util.Mailer;
 
 import javax.xml.ws.WebServiceException;
 import java.util.ArrayList;
@@ -42,6 +43,9 @@ public class SynchronizationCrmSchedule {
 
     @Autowired
     private ContactoClient contactoClient;
+
+    @Autowired
+    private Mailer mailer;
 
     @Scheduled(cron="0 0 8-21 * * MON-FRI")
     public void run() throws Exception{
@@ -121,7 +125,7 @@ public class SynchronizationCrmSchedule {
 
     }
 
-    @Scheduled(cron="0 0 9,11,13,15,17,19,21 * * *")
+    @Scheduled(cron="0 0/30 9,11,13,15,17,19,21 * * *")
     public void runInscritos() throws Exception{
         log.info("run");
 
@@ -146,15 +150,17 @@ public class SynchronizationCrmSchedule {
                         throw new WebServiceException(result.getStrMensajeError().getValue());
 
                     sUpdate = inscripcion.getUpdate();
-                    if(sUpdate!=null && !("".equals(sUpdate)))
+                    if(sUpdate!=null && !("".equals(sUpdate))){
                         crmService.checkProducto(sUpdate);
+                        crmService.checkInscripcionCrm(inscripcion,result);
+                    }
 
                     log.info("sendInscripcion success!");
                     messages.add("OK: [Curso:" + inscripcion.getStrIdCursoTecsup().getValue() + " - Termino:" + inscripcion.getStrIdTerminoTecsup().getValue() + " - NumeroDoc:" + inscripcion.getStrNumeroDocContacto().getValue() + "] Inscripcion Actualizado!");
 
                 } catch (Exception e) {
                     log.error(e, e);
-                    messages.add("ERROR I: [Curso:" + inscripcion.getStrIdCursoTecsup().getValue() + " - Termino" + inscripcion.getStrIdTerminoTecsup().getValue() + " - NumeroDoc:" + inscripcion.getStrNumeroDocContacto().getValue() + "] " + e.getMessage());
+                    messages.add("ERROR I: [Curso:" + inscripcion.getStrIdCursoTecsup().getValue() + " - Termino:" + inscripcion.getStrIdTerminoTecsup().getValue() + " - NumeroDoc:" + inscripcion.getStrNumeroDocContacto().getValue() + "] " + e.getMessage());
                 }
             }
 
@@ -173,7 +179,8 @@ public class SynchronizationCrmSchedule {
 
     }
 
-    @Scheduled(cron="0 0 8,10,12,14,16,18,20 * * *")
+    //@Scheduled(fixedDelay = Long.MAX_VALUE)
+    @Scheduled(cron="0 0/30 8,10,12,14,16,18,20 * * *")
     public void runContactos() throws Exception{
         log.info("runContactos");
 
@@ -195,14 +202,32 @@ public class SynchronizationCrmSchedule {
                     if (!result.getBlnResultado().getValue())
                         throw new WebServiceException(result.getStrMensajeError().getValue());
 
+                    log.info("checkContacto 1:" + result.getStrIdContacto().getValue());
+                    log.info("checkContacto 2:" + contacto.getStrCodPersona().getValue().toString());
                     crmService.checkContacto(result.getStrIdContacto().getValue(),contacto.getStrCodPersona().getValue().toString());
 
                     log.info("sendContacto success!");
-                    messages.add("OK: [Contacto:" + contacto.getStrLastName().getValue() + " - NumDoc:" + contacto.getStrNumDocumento().getValue() + "] Contacto creado!");
+                    if(contacto.getStrTipoOperacion().getValue().equals("1"))
+                        messages.add("OK: [Contacto:" + contacto.getStrLastName().getValue() + " - NumDoc:" + contacto.getStrNumDocumento().getValue() + "] Contacto creado!");
+                    else
+                        messages.add("OK: [Contacto:" + contacto.getStrLastName().getValue() + " - NumDoc:" + contacto.getStrNumDocumento().getValue() + "] Contacto actualizado!");
 
                 }catch (Exception e) {
                     log.error(e, e);
-                    messages.add("ERROR C: [Contacto:" + contacto.getStrLastName().getValue() + " - NumDoc" + contacto.getStrNumDocumento().getValue() + "] " + e.getMessage());
+                    messages.add("ERROR C: [Contacto:" + contacto.getStrLastName().getValue() + " - NumDoc:" + contacto.getStrNumDocumento().getValue() + "] " + e.getMessage());
+
+                    //INVALID_EMAIL_ADDRESS
+                    if(e.getMessage().contains("INVALID_EMAIL_ADDRESS")){
+                        String message = "El siguiente contacto registra un correo inválido. Por favor, realice la corrección en el sistema de inscripciones SINS.\n\n";
+                        message += "Nombre: " + contacto.getStrPrimerNombre().getValue() + " " + contacto.getStrLastName().getValue() + "\n";
+                        message += "Nro Doc.: " + contacto.getStrNumDocumento().getValue() + "\n";
+                        message += "Correo inválido: " + contacto.getStrEmail().getValue() + "\n\n";
+                        message += "Error Description:" + e.getMessage();
+                        //mailer.sendMailToAdministrator("Correo Inválido",message,"jpalomino@tecsup.edu.pe");
+                        mailer.sendMailToAdministrator("Correo Inválido",message,contacto.getStrEmailActualizador().getValue());
+
+
+                    }
                 }
             }
 

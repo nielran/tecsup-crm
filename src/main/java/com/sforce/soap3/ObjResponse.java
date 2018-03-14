@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "objResponse", propOrder = {
     "blnResultado",
-    "strIdCourseEnrollment",
+    "strIdCourseEnrollment", "strIdOpportunity",
     "strMensajeError"
 })
 public class ObjResponse {
@@ -48,6 +48,8 @@ public class ObjResponse {
     protected JAXBElement<Boolean> blnResultado;
     @XmlElementRef(name = "strIdCourseEnrollment", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
     protected JAXBElement<String> strIdCourseEnrollment;
+    @XmlElementRef(name = "strIdOpportunity", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> strIdOpportunity;
     @XmlElementRef(name = "strMensajeError", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
     protected JAXBElement<String> strMensajeError;
 
@@ -123,4 +125,8 @@ public class ObjResponse {
         this.strMensajeError = value;
     }
 
+    public JAXBElement<String> getStrIdOpportunity() { return strIdOpportunity; }
+    public void setStrIdOpportunity(JAXBElement<String> value) {
+        this.strIdOpportunity = value;
+    }
 }

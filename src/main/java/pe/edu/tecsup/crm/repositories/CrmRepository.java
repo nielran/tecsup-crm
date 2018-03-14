@@ -2,21 +2,25 @@ package pe.edu.tecsup.crm.repositories;
 
 import com.sforce.soap2.TECActualizarProductoRequestCls;
 import com.sforce.soap3.ObjRequest;
+import com.sforce.soap3.ObjResponse;
 import com.sforce.soap3.ObjectFactory;
 import com.sforce.soap4.ObjRequest4;
 //import com.sforce.soap4.ObjectFactory4;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.sql.SQLException;
 
 @Repository
 public class CrmRepository {
@@ -90,6 +94,23 @@ public class CrmRepository {
         }
     }
 
+    public void checkInscripcionCrm(ObjRequest inscripcion, ObjResponse respuesta) throws Exception {
+        log.info("checkInscripcionCrm");
+        String sql = "select count(*) totId from comercial.COM_INSCRIPCION_CRM where NUMGRUPO=? and NUMINSCRIPCION=?";
+
+        Integer totId = jdbcTemplate.queryForObject(sql, new RowMapper<Integer>() {
+            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getInt("totId");
+            }
+        }, inscripcion.getStrNumGrupo().getValue() ,inscripcion.getStrNumInscripcion().getValue());
+
+        if(totId==0){
+            sql = "insert into comercial.COM_INSCRIPCION_CRM (id, NUMGRUPO, NUMINSCRIPCION, IDOPPORTUNITY, IDCOURSEENROLLMENT) values (SEQCOMINSCRIPCIONCRM.nextval, ?, ?, ?, ?)";
+            jdbcTemplate.update(sql,inscripcion.getStrNumGrupo().getValue(), inscripcion.getStrNumInscripcion().getValue(),
+                    respuesta.getStrIdOpportunity().getValue(), respuesta.getStrIdCourseEnrollment().getValue());
+        }
+    }
+
     public void checkContacto(String idContacto, String codSujeto) throws Exception {
         log.info("checkContacto: " + idContacto + " - sujeto:"+ codSujeto);
         String sql = "UPDATE GENERAL.GEN_SUJETO SET migrasf='1',fecmigrasf=sysdate,IDSF='" + idContacto + "' where codsujeto=" + codSujeto + " and nvl(migrasf,'0')='0'";
@@ -136,6 +157,10 @@ public class CrmRepository {
                 inscripcion.setStrMotivoAnulacion(factory.createObjRequestStrMotivoAnulacion((String)record.get("MOTIVOANULACION")));
                 inscripcion.setStrFecInscripcion(factory.createObjRequestStrFecInscripcion((String)record.get("FECINSCRIPCION")));
                 inscripcion.setStrIDInscriptor(factory.createObjRequestStrIDInscriptor((String)record.get("IDSF_INSCRIPTOR")));
+                inscripcion.setStrFamilia(factory.createObjRequestStrFamilia((String)record.get("FAMILIA")));
+                inscripcion.setStrNumGrupo(factory.createObjRequestStrNumGrupo((String)record.get("NUMGRUPO")));
+                inscripcion.setStrNumInscripcion(factory.createObjRequestStrNumInscripcion((String)record.get("NUMINSCRIPCION")));
+
                 inscripcion.setUpdate((String)record.get("COLUM_UPDATE"));
                 inscripciones.add(inscripcion);
             }
@@ -209,7 +234,8 @@ public class CrmRepository {
                 contacto.setStrTipoPersona(factory.createObjRequestStrTipoPersona((String)record.get("TIPO_DE_PERSONA__C")));
                 contacto.setStrRecordTypeId(factory.createObjRequestStrRecordTypeId((String)record.get("RECORDTYPEID")));
                 contacto.setStrCodPersona(factory.createObjRequestStrCodPersona((String)record.get("CRM_CODIGOALUMNO__C")));
-
+                contacto.setStrTipoOperacion(factory.createObjRequestStrTipoOperacion((String)record.get("TIPOOPERACION")));
+                contacto.setStrEmailActualizador(factory.createObjRequestStrEmailActualizador((String)record.get("EMAIL_ACTUALIZADOR")));
                 contactos.add(contacto);
             }
             log.info("contactos: " + contactos);

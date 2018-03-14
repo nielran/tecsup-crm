@@ -54,7 +54,9 @@ import javax.xml.bind.annotation.XmlType;
         "strSegundoNombre",
         "strTelefonoCasa",
         "strTipoDocumento",
-        "strTipoPersona"
+        "strTipoPersona",
+        "strTipoOperacion",
+        "strEmailActualizador"
 })
 public class ObjRequest4 {
 
@@ -100,6 +102,10 @@ public class ObjRequest4 {
     protected JAXBElement<String> strTipoDocumento;
     @XmlElementRef(name = "strTipoPersona", namespace = "http://soap.sforce.com/schemas/class/TEC_SincronizarContactos_ws", type = JAXBElement.class, required = false)
     protected JAXBElement<String> strTipoPersona;
+    @XmlElementRef(name = "strTipoOperacion", namespace = "http://soap.sforce.com/schemas/class/TEC_SincronizarContactos_ws", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> strTipoOperacion;
+    @XmlElementRef(name = "strEmailActualizador", namespace = "http://soap.sforce.com/schemas/class/TEC_SincronizarContactos_ws", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> strEmailActualizador;
 
 
     /**
@@ -606,4 +612,13 @@ public class ObjRequest4 {
         this.strTipoPersona = value;
     }
 
+    public JAXBElement<String> getStrTipoOperacion() {
+        return strTipoOperacion;
+    }
+    public void setStrTipoOperacion(JAXBElement<String> value) {
+        this.strTipoOperacion = value;
+    }
+
+    public JAXBElement<String> getStrEmailActualizador() { return strEmailActualizador; }
+    public void setStrEmailActualizador(JAXBElement<String> value) { this.strEmailActualizador = value; }
 }

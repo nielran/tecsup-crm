@@ -2,6 +2,7 @@ package pe.edu.tecsup.crm.services;
 
 import com.sforce.soap2.TECActualizarProductoRequestCls;
 import com.sforce.soap3.ObjRequest;
+import com.sforce.soap3.ObjResponse;
 import com.sforce.soap4.ObjRequest4;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class CrmService {
 	public void checkProducto(String sql) throws Exception {
 		log.info("calling checkProducto");
 		crmRepository.checkProducto(sql);
+	}
+
+	public void checkInscripcionCrm(ObjRequest inscripcion, ObjResponse respuesta)throws Exception {
+		log.info("calling checkInscripcionCrm");
+		crmRepository.checkInscripcionCrm(inscripcion,respuesta);
 	}
 
 	public void checkContacto(String idContacto, String codSujeto) throws Exception {

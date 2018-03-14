@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.*;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "objRequest", propOrder = {
-    "strIDInscriptor","strFecInscripcion",
+    "strNumGrupo", "strNumInscripcion", "strFamilia","strIDInscriptor","strFecInscripcion",
     "strMotivoAnulacion",
     "strTipoVenta",
     "strMoneda",
@@ -55,7 +55,12 @@ import javax.xml.bind.annotation.*;
     "strTipoOperacion"
 })
 public class ObjRequest {
-
+    @XmlElementRef(name = "strNumGrupo", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> strNumGrupo;
+    @XmlElementRef(name = "strNumInscripcion", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> strNumInscripcion;
+    @XmlElementRef(name = "strFamilia", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> strFamilia;
     @XmlElementRef(name = "strIDInscriptor", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
     protected JAXBElement<String> strIDInscriptor;
     @XmlElementRef(name = "strFecInscripcion", namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", type = JAXBElement.class, required = false)
@@ -313,9 +318,29 @@ public class ObjRequest {
     public JAXBElement<String> getStrIDInscriptor() {
         return strIDInscriptor;
     }
-
     public void setStrIDInscriptor(JAXBElement<String> strIDInscriptor) {
         this.strIDInscriptor = strIDInscriptor;
+    }
+
+    public JAXBElement<String> getStrFamilia() {
+        return strFamilia;
+    }
+    public void setStrFamilia(JAXBElement<String> strFamilia) {
+        this.strFamilia = strFamilia;
+    }
+
+    public JAXBElement<String> getStrNumGrupo() {
+        return strNumGrupo;
+    }
+    public void setStrNumGrupo(JAXBElement<String> strNumGrupo) {
+        this.strNumGrupo = strNumGrupo;
+    }
+
+    public JAXBElement<String> getStrNumInscripcion() {
+        return strNumInscripcion;
+    }
+    public void setStrNumInscripcion(JAXBElement<String> strNumInscripcion) {
+        this.strNumInscripcion = strNumInscripcion;
     }
 
     @XmlTransient

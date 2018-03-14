@@ -14,6 +14,9 @@
    </xsd:element>
    <xsd:complexType name="objRequest">
     <xsd:sequence>
+     <xsd:element name="strNumGrupo" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="strNumInscripcion" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="strFamilia" minOccurs="0" type="xsd:string" nillable="true"/>
      <xsd:element name="strIDInscriptor" minOccurs="0" type="xsd:string" nillable="true"/>
      <xsd:element name="strFecInscripcion" minOccurs="0" type="xsd:string" nillable="true"/>
      <xsd:element name="strMotivoAnulacion" minOccurs="0" type="xsd:string" nillable="true"/>
@@ -34,6 +37,7 @@
     <xsd:sequence>
      <xsd:element name="blnResultado" minOccurs="0" type="xsd:boolean" nillable="true"/>
      <xsd:element name="strIdCourseEnrollment" minOccurs="0" type="xsd:string" nillable="true"/>
+     <xsd:element name="strIdOpportunity" minOccurs="0" type="xsd:string" nillable="true"/>
      <xsd:element name="strMensajeError" minOccurs="0" type="xsd:string" nillable="true"/>
     </xsd:sequence>
    </xsd:complexType>
@@ -89,7 +93,7 @@
    <!--
    <soap:address location="https://cs13.salesforce.com/services/Soap/class/TEC_ProductosAdquiridosPorCliente_ws"/>
 -->
-   <!---->
+   <!-- -->
    <soap:address location="https://na40.salesforce.com/services/Soap/class/TEC_ProductosAdquiridosPorCliente_ws"/>
 
   </port>

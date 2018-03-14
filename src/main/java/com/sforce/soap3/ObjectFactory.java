@@ -31,6 +31,9 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _ObjRequestStrNumGrupo_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strNumGrupo");
+    private final static QName _ObjRequestStrNumInscripcion_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strNumInscripcion");
+    private final static QName _ObjRequestStrFamilia_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strFamilia");
     private final static QName _ObjRequestStrIDInscriptor_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strIDInscriptor");
     private final static QName _ObjRequestStrFecInscripcion_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strFecInscripcion");
     private final static QName _ObjRequestStrMotivoAnulacion_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strMotivoAnulacion");
@@ -39,6 +42,7 @@ public class ObjectFactory {
     private final static QName _ObjRequestNumMonto_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "numMonto");
     private final static QName _ObjResponseBlnResultado_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "blnResultado");
     private final static QName _ObjResponseStrIdCourseEnrollment_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strIdCourseEnrollment");
+    private final static QName _ObjResponseStrIdOpportunity_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strIdOpportunity");
     private final static QName _ObjResponseStrMensajeError_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strMensajeError");
     private final static QName _ObjRequestStrAuspiciador_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strAuspiciador");
     private final static QName _ObjRequestStrConvenio_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", "strConvenio");
@@ -112,6 +116,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "strIdCourseEnrollment", scope = ObjResponse.class)
     public JAXBElement<String> createObjResponseStrIdCourseEnrollment(String value) {
         return new JAXBElement<String>(_ObjResponseStrIdCourseEnrollment_QNAME, String.class, ObjResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     *
+     */
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "strIdOpportunity", scope = ObjResponse.class)
+    public JAXBElement<String> createObjResponseStrIdOpportunity(String value) {
+        return new JAXBElement<String>(_ObjResponseStrIdOpportunity_QNAME, String.class, ObjResponse.class, value);
     }
 
     /**
@@ -223,5 +236,20 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "strIDInscriptor", scope = ObjRequest.class)
     public JAXBElement<String> createObjRequestStrIDInscriptor(String value) {
         return new JAXBElement<String>(_ObjRequestStrIDInscriptor_QNAME, String.class, ObjRequest.class, value);
+    }
+
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "strFamilia", scope = ObjRequest.class)
+    public JAXBElement<String> createObjRequestStrFamilia(String value) {
+        return new JAXBElement<String>(_ObjRequestStrFamilia_QNAME, String.class, ObjRequest.class, value);
+    }
+
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "strNumGrupo", scope = ObjRequest.class)
+    public JAXBElement<String> createObjRequestStrNumGrupo(String value) {
+        return new JAXBElement<String>(_ObjRequestStrNumGrupo_QNAME, String.class, ObjRequest.class, value);
+    }
+
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_ProductosAdquiridosPorCliente_ws", name = "strNumInscripcion", scope = ObjRequest.class)
+    public JAXBElement<String> createObjRequestStrNumInscripcion(String value) {
+        return new JAXBElement<String>(_ObjRequestStrNumInscripcion_QNAME, String.class, ObjRequest.class, value);
     }
 }

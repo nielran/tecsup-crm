@@ -48,6 +48,8 @@ public class ObjectFactory {
     private final static QName _ObjRequestStrDomicilio_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_SincronizarContactos_ws", "strDomicilio");
     private final static QName _ObjRequestStrFecAceptaLey_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_SincronizarContactos_ws", "strFecAceptaLey");
     private final static QName _ObjRequestStrNumDocumento_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_SincronizarContactos_ws", "strNumDocumento");
+    private final static QName _ObjRequestStrTipoOperacion_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_SincronizarContactos_ws", "strTipoOperacion");
+    private final static QName _ObjRequestStrEmailActualizador_QNAME = new QName("http://soap.sforce.com/schemas/class/TEC_SincronizarContactos_ws", "strEmailActualizador");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: yyyy
@@ -315,4 +317,21 @@ public class ObjectFactory {
         return new JAXBElement<String>(_ObjResponseStrIdContacto_QNAME, String.class, ObjResponse4.class, value);
     }
 
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     *
+     */
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_SincronizarContactos_ws", name = "strTipoOperacion", scope = ObjRequest4.class)
+    public JAXBElement<String> createObjRequestStrTipoOperacion(String value) {
+        return new JAXBElement<String>(_ObjRequestStrTipoOperacion_QNAME, String.class, ObjRequest4.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     *
+     */
+    @XmlElementDecl(namespace = "http://soap.sforce.com/schemas/class/TEC_SincronizarContactos_ws", name = "strEmailActualizador", scope = ObjRequest4.class)
+    public JAXBElement<String> createObjRequestStrEmailActualizador(String value) {
+        return new JAXBElement<String>(_ObjRequestStrEmailActualizador_QNAME, String.class, ObjRequest4.class, value);
+    }
 }
